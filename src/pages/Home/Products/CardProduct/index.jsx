@@ -4,8 +4,7 @@ import { IconCartShop, IconCartShopp } from "../../../../ui/icons";
 import { useCart } from "@/hook/useContextProvider";
 import { showLeft } from "@/ui/animations";
 import { device } from "@/ui/StylesApp";
-import { ButtonAddCart } from "@/ui/styled-components/ButtonAddCart";
-import { NeonShadow } from "@/ui/styles";
+import { NeonShadow, BoxShadow } from "@/ui/styles";
 import { StarRating } from "./StarRating";
 import { DiscountPrice } from "./DiscountPrice";
 
@@ -30,7 +29,7 @@ export const CardProduct = ({ product, isProductIncart }) => {
           {product.title} ({product.brand})
         </strong>
       </span>
-      <h2>${product?.price}</h2>
+      <h2>€{product?.price}</h2>
       <DiscountPrice discount={product.discountPercentage} animation="rigth" />
 
       <div>
@@ -44,11 +43,11 @@ export const CardProduct = ({ product, isProductIncart }) => {
         >
           {isProductIncart ? <IconCartShop /> : <IconCartShopp />}
         </button>
-        {/* <ButtonAddCart /> */}
       </div>
     </Item>
   );
 };
+
 const Item = styled.li`
   position: relative;
   display: flex;
@@ -59,9 +58,9 @@ const Item = styled.li`
   border-radius: 30px;
   overflow: hidden;
   z-index: 200;
-  transition: all 0.6s ease-in-out;
   ${NeonShadow}
-  animation: ${showLeft} 1s ease-in-out;
+  transition: all 0.4s ease-in-out;
+
   img {
     border-radius: 30px;
     width: 100%;
@@ -89,10 +88,18 @@ const Item = styled.li`
     }
   }
   div button {
-    padding: 10px;
-    /* height: 5rem;
-    width: 8rem; */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 2px 10px;
+    height: 4rem;
+    width: 7.5rem;
     border-radius: 16px;
+    font-size: 1rem;
+    &:hover {
+      ${NeonShadow}
+      scale: 0.9;
+    }
   }
   span {
     margin: 5px;
@@ -113,8 +120,10 @@ const Item = styled.li`
     img {
       filter: blur(2px);
       transform: translateY(10%);
+      ${BoxShadow}
     }
     h2 {
+      text-shadow: 1px 2px 3px;
       text-align: center;
       transform: translateY(-15%) scale(1.2);
     }

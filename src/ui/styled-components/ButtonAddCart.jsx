@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { keyframes, styled } from "styled-components";
-
-export const ButtonAddCart = () => {
+import { UilEuroCircle, UilShoppingCartAlt } from "@iconscout/react-unicons";
+import { BoxShadow, NeonShadow } from "../styles";
+export const ButtonAddCart = ({ children, fn }) => {
   const [clicked, setClicked] = useState(false);
   const ClickedButton = () => {
+    fn();
     setClicked(true);
     setTimeout(() => {
       setClicked(false);
     }, 3000);
   };
+
   return (
-    <Button
-      className={`mycart-button ${clicked && "clicked"}`}
-      onClick={ClickedButton}
-    >
-      <AddToCart className="add-to-cart">Add to cart</AddToCart>
-      <Added className="added">Added</Added>
-      <IconCart className="bx bxs-cart"></IconCart>
-      <IconBitcoin className="bx bxl-bitcoin"></IconBitcoin>
+    <Button className={`${clicked && "clicked"}`} onClick={ClickedButton}>
+      <AddToCart>{children}</AddToCart>
+
+      <Added>Added</Added>
+
+      <IconCart></IconCart>
+      <IconEuro></IconEuro>
     </Button>
   );
 };
@@ -56,17 +58,19 @@ const txt2 = keyframes`	0%, 80% {
 	100% {
 		opacity: 1;
 	}`;
-const IconCart = styled.i`
+const IconCart = styled(UilShoppingCartAlt)`
   position: absolute;
-  z-index: 2;
+  color: #000000;
+  z-index: 300;
   top: 50%;
   left: -10%;
   font-size: 2em;
   transform: translate(-50%, -50%);
 `;
-const IconBitcoin = styled.i`
+const IconEuro = styled(UilEuroCircle)`
   position: absolute;
-  z-index: 3;
+  z-index: 200;
+  color: #f8de22;
   top: -20%;
   left: 52%;
   font-size: 1.2em;
@@ -79,19 +83,21 @@ const Added = styled.span`
   opacity: 0;
 `;
 const Button = styled.button`
-  font-size: 14px;
   position: relative;
+  font-size: 14px;
   padding: 10px;
   width: 250px;
   height: 60px;
-  background-color: #4834d4;
+  background-color: transparent;
+  /* background-color: #4834d4; */
+  ${BoxShadow}
   border: 0;
   border-radius: 50px;
   color: #fff;
   text-transform: uppercase;
   outline: none;
   overflow: hidden;
-  transition: 0.3s ease-in-out;
+  transition: 0.4s ease-in-out;
   span {
     position: absolute;
     z-index: 3;
@@ -103,6 +109,7 @@ const Button = styled.button`
   }
   &:hover {
     background-color: #35269b;
+    ${NeonShadow}
   }
   &:active {
     transform: scale(0.9);
@@ -111,7 +118,7 @@ const Button = styled.button`
     ${IconCart} {
       animation: ${cart} 1.5s ease-in-out forwards;
     }
-    ${IconBitcoin} {
+    ${IconEuro} {
       animation: ${box} 1.5s ease-in-out forwards;
     }
     ${AddToCart} {

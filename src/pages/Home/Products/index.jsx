@@ -2,32 +2,43 @@ import { keyframes, styled } from "styled-components";
 import { FilterProducts } from "./FilterProducts";
 import { CardProduct } from "./CardProduct";
 import { checkProductInCart } from "@/helpers/checkProductInCart";
-import { useCart } from "@/hook/useContextProvider";
-import { useLazyLoader } from "@/hook/useLazyLoader";
 import { apiData } from "@/api/api";
+import { useCart, useFilterContext } from "@/hook/useContextProvider";
+import { useLazyLoader } from "@/hook/useLazyLoader";
 import { device } from "@/ui/StylesApp";
-import { BoxShadow } from "../../../ui/styles";
+import { BoxShadow } from "@/ui/styles";
+import { NoCardProduct } from "./CardProduct/NoCardProduct";
 
 export const Products = () => {
   const { filteredProducts } = apiData();
   const { cartState } = useCart();
+  const { setFilters } = useFilterContext();
   const { visibleProducts, loadMoreRef } = useLazyLoader();
+  const resetFilters = () => {
+    setFilters((prevState) => ({ ...prevState, minPrice: 0, category: "all" }));
+  };
+
   return (
     <MainContainer>
       <FilterProducts />
-      <ul>
-        {/*con slice creo una nueva matriz a partir de los productos visibles, luego con map itero esa matriz creada */}
-        {filteredProducts?.slice(0, visibleProducts).map((product) => {
-          const isProductIncart = checkProductInCart(product, cartState); // boolean si el producto está en el cartshop
-          return (
-            <CardProduct
-              product={product}
-              key={product.id}
-              isProductIncart={isProductIncart}
-            />
-          );
-        })}
-      </ul>
+      {filteredProducts && filteredProducts.length > 0 ? (
+        <ul>
+          {/*con slice creo una nueva matriz a partir de los productos visibles, luego con map itero esa matriz creada */}
+          {filteredProducts?.slice(0, visibleProducts).map((product, index) => {
+            const isProductIncart = checkProductInCart(product, cartState); // boolean si el producto está en el cartshop
+            return (
+              <CardProduct
+                product={product}
+                key={product?.id}
+                isProductIncart={isProductIncart}
+                delay={index * 0.2}
+              />
+            );
+          })}
+        </ul>
+      ) : (
+        <NoCardProduct fn={resetFilters} />
+      )}
       {visibleProducts < filteredProducts?.length && (
         <LoadingRef ref={loadMoreRef}>Cargando...</LoadingRef>
       )}
@@ -76,7 +87,6 @@ const MainContainer = styled.main`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1rem;
-    //*
   }
 
   @media ${device.md} {
@@ -85,5 +95,4 @@ const MainContainer = styled.main`
   @media ${device.lg} {
     padding: 3rem;
   }
-
 `;

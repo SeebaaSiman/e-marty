@@ -43,3 +43,6 @@ from{
 }`;
 
 /* animation: ${(props) =>props.animationDirection === "left"? `${showDiscountLeft}`: `${showDiscountRight}`} 5s linear infinite; */
+//*delay será delay={index * 0.2}
+/* animation: ${showLeft} 1s ease-in-out;
+  animation-delay: ${(props) => props.delay || 0}s; */

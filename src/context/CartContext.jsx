@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 import { useCartReducer } from "../store/cart/useCartReducer";
 //*creo el contexto
 export const CartContext = createContext();
@@ -7,6 +7,16 @@ export const CartProvider = ({ children }) => {
   //* las fx dispatch y el state de cartReducer las paso al proveedor para que toda la app se alimente
   const { state, clearCart, removeFromCart, addToCart, clearSameProduct } =
     useCartReducer();
+
+  const totalPrice = useMemo(() => {
+    const totalPriceArray = state.map((item) => item.price * item.quantity);
+    return totalPriceArray.reduce(
+      (total, elementPrice) => total + elementPrice,
+      0
+    );
+  }, [state]);
+
+  
   return (
     <CartContext.Provider
       value={{
@@ -15,6 +25,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         addToCart,
         clearSameProduct,
+        totalPrice,
       }}
     >
       {children}

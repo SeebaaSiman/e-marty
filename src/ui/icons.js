@@ -3,7 +3,6 @@ import { UilPricetagAlt, UilStarHalfAlt, UilStar, UilEuro, UilTimesCircle, UilPl
 import { NeonShadow } from "./styles";
 //*style
 const styleNavbar = css`
-color: white;
 filter:  drop-shadow(1px 1px 1px #3333);
   /* margin-right: 0.5rem; */
   height: 100%;
@@ -60,3 +59,4 @@ export const IconDiscount = styled(UilPricetagAlt)`
 /* filter:  drop-shadow(0px 0px 16px #ff0058); */
 color:#ff0058;
 `
+

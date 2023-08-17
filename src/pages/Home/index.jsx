@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { Banner } from "./Banner";
 import { Products } from "./Products";
+import { useBuying } from "@/hook/useContextProvider";
 
 export const Home = () => {
+  const { setInBuy } = useBuying();
+  useEffect(() => {
+    setInBuy(false);
+  }, []);
   return (
     <HomeContainer>
       {/*  Este div en mobile lo hago reverse para que esté primero el carrito y después las promociones del banner */}

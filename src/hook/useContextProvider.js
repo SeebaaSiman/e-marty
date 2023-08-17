@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FiltersContext, CartContext } from "../context/";
+import { FiltersContext, CartContext, BuyingContext } from "../context/";
 
 export const useFilterContext = () => {
  const context = useContext(FiltersContext);
@@ -16,6 +16,14 @@ export const useCart = () => {
  }
  return context;
 };
+
+export const useBuying = () => {
+ const context = useContext(BuyingContext)
+ if (context === undefined) {
+  throw new Error("useBuying must be used within a CartProvider");
+ }
+ return context;
+}
 
 //*En mis componentes llamo a useCart para traer el state global y dispatch, con el dispatch manejo las acciones
 // const { state, dispatch } = useCart();

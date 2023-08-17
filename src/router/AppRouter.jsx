@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "../ui/layout";
 import { Home, Buy } from "../pages";
 import { ProductDetail } from "../pages/Home/Products/ProductDetail";
+import { CreditCard } from "../pages/Buy/CreditCard";
 export const AppRouter = () => {
   return (
     <Routes>

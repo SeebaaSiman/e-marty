@@ -27,7 +27,7 @@ export const FilterProducts = () => {
           onChange={handleChangeMinPrice}
           value={filters.minPrice}
         />
-        <span>${filters.minPrice}</span>
+        <span>€{filters.minPrice}</span>
       </InputRange>
 
       <div>

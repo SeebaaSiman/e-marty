@@ -29,9 +29,3 @@ clearCart();
 Reset <IconTrash />
 </p>
 </button>
-
-crear loading de carga con efecto skeleton titilando , algo de neón sutil con poco height y que ocupe todo el width
-
-Separar un componente que sea un div que recibe una animación y descuento para la animación del descuento, así lo puedo poner en diferentes lugares y no el componente con los dos divs y el precio central
-
-contentProduct : envolver el price en un button add to cart
