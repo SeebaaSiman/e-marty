@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { BoxShadow } from "../../ui/styles";
+import { ButtonGlowing } from "../../ui/styled-components/ButtonGlowing";
 
 export const HorizontalScroll = ({ children }) => {
   //* Agregarlo al BuyContext
@@ -15,11 +16,11 @@ export const HorizontalScroll = ({ children }) => {
         style={{ transform: `translateX(-${scrollPosition}%)` }}
       >
         <Content bgColor="">
+          <ButtonGlowing fn={() => handleScroll(50)}>Next →</ButtonGlowing>
           {children[0]}
-          <span onClick={() => handleScroll(50)}>→</span>
         </Content>
         <Content bgColor="">
-          <span onClick={() => handleScroll(-50)}>←</span>
+          <ButtonGlowing fn={() => handleScroll(-50)}>← Back</ButtonGlowing>
           {children[1]}
         </Content>
       </HorizontalScrollContainer>
@@ -28,19 +29,13 @@ export const HorizontalScroll = ({ children }) => {
 };
 const BuyPageContainer = styled.div`
   position: relative;
-  display: flex;
-  min-height: 80vh;
-  padding: 1rem;
-  /* background-color: black; */
-  overflow: hidden;
+  height: 100%;
   ${BoxShadow}
 `;
 const HorizontalScrollContainer = styled.div`
   display: flex;
   width: 200%; /* Cambia el ancho para la cantidad de contenido */
   scroll-behavior: smooth;
-  /* background-color: aqua; */
-
   gap: 2rem;
   transition: transform 0.3s ease-in-out;
 `;
@@ -50,10 +45,8 @@ const Content = styled.div`
   min-height: 80vh; /* Altura completa del viewport */
   scroll-snap-align: start;
   border-radius: 16px;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  background-color: ${({ bgColor }) => bgColor};
 `;

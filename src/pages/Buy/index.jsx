@@ -4,7 +4,7 @@ import { useCart, useBuying } from "@/hook/useContextProvider";
 
 import { HorizontalScroll } from "./HorizontalScroll";
 import { BuyingList } from "./BuyingList";
-import { CreditCard } from "./CreditCard";
+import { Buying } from "./Buying";
 
 export const Buy = () => {
   const { cartState, totalPrice } = useCart();
@@ -25,7 +25,7 @@ export const Buy = () => {
         totalPrice={totalPrice}
         exitBuy={exitBuy}
       />
-      <CreditCard />
+      <Buying />
     </HorizontalScroll>
   );
 };

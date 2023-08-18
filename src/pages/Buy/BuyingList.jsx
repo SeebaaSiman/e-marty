@@ -19,7 +19,6 @@ export const BuyingList = ({ cartState, totalPrice, exitBuy }) => {
 };
 const BuyPage = styled.div`
   width: 100%;
-
   @media ${device.sm} {
     width: 90%;
   }
